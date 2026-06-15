@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --wj-bg: #070708;
+  --wj-surface: #121216;
+  --wj-elevated: #1d1d24;
+  --wj-border: rgba(255,255,255,.09);
+}
+
+* { box-sizing: border-box; }
+html { background: var(--wj-bg); }
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(239, 68, 68, .12), transparent 32rem),
+    radial-gradient(circle at 85% 5%, rgba(245, 158, 11, .08), transparent 26rem),
+    linear-gradient(135deg, #070708 0%, #0d0d12 52%, #09090b 100%);
+  color: #fafafa;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #09090b; }
+::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #71717a; }
+
+:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+@layer components {
+  .wj-shell {
+    @apply min-h-screen bg-transparent text-wj-text;
+  }
+
+  .wj-page {
+    @apply mx-auto w-full max-w-7xl px-4 py-5 sm:px-6 lg:px-8 lg:py-7;
+  }
+
+  .wj-card {
+    @apply rounded-2xl border border-white/10 bg-zinc-950/70 shadow-xl shadow-black/20 backdrop-blur;
+  }
+
+  .wj-card-soft {
+    @apply rounded-2xl border border-white/10 bg-white/[0.035] shadow-lg shadow-black/10;
+  }
+
+  .wj-panel {
+    @apply rounded-3xl border border-white/10 bg-gradient-to-br from-zinc-950/95 to-zinc-900/70 shadow-2xl shadow-black/30;
+  }
+
+  .wj-input {
+    @apply w-full rounded-xl border border-white/10 bg-zinc-950/80 px-3.5 py-2.5 text-sm text-white placeholder-zinc-500 shadow-inner shadow-black/20 outline-none transition focus:border-amber-400/70 focus:ring-2 focus:ring-amber-400/20;
+  }
+
+  .wj-label {
+    @apply mb-1.5 block text-[11px] font-bold uppercase tracking-[0.14em] text-zinc-400;
+  }
+
+  .wj-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-red-600 to-amber-500 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-red-950/30 transition hover:brightness-110 active:scale-[.99] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .wj-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.06] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/[0.1] active:scale-[.99];
+  }
+
+  .wj-btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-zinc-300 transition hover:bg-white/[0.07] hover:text-white active:scale-[.99];
+  }
+
+  .wj-badge {
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-zinc-300;
+  }
+
+  .wj-table {
+    @apply w-full border-collapse text-sm;
+  }
+  .wj-table thead {
+    @apply bg-white/[0.04] text-[11px] uppercase tracking-[0.12em] text-zinc-400;
+  }
+  .wj-table th { @apply p-3 text-left font-bold; }
+  .wj-table td { @apply border-t border-white/10 p-3 align-middle; }
+  .wj-table tbody tr { @apply transition hover:bg-white/[0.035]; }
+
+  .nav-link {
+    @apply flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-zinc-400 transition hover:bg-white/[0.06] hover:text-white;
+  }
+  .nav-link.active {
+    @apply bg-gradient-to-r from-red-600/20 to-amber-500/10 text-white ring-1 ring-white/10;
+  }
+
+  .stat-card {
+    @apply transition duration-150 hover:-translate-y-0.5 hover:border-amber-400/25;
+  }
+}
+
+@media (max-width: 767px) {
+  .wj-desktop-table { display: none; }
+}
+
+@media (min-width: 768px) {
+  .wj-mobile-list { display: none; }
+}
+.field { display:flex; flex-direction:column; gap:.4rem; }
+.field > span { font-size:.72rem; font-weight:900; text-transform:uppercase; letter-spacing:.08em; color:#2563eb; }
+.field input, .field select, .field textarea { width:100%; border-radius:1rem; border:1px solid #dbe4ee; background:#fff; padding:1rem; color:#0f172a; outline:none; font-size:1rem; }
+.field textarea { min-height:7rem; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color:#2563eb; box-shadow:0 0 0 3px rgba(37,99,235,.12); }
+
+
+@layer components {
+  .wj-appbar {
+    @apply sticky top-0 z-40 flex min-h-16 items-center gap-2 border-b border-white/10 bg-blue-600 px-4 text-white shadow-lg shadow-black/20;
+  }
+  .wj-appbar-title {
+    @apply flex-1 truncate text-xl font-black tracking-tight sm:text-2xl;
+  }
+  .wj-appbar-btn {
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-white transition hover:bg-white/15 disabled:opacity-60;
+  }
+  .wj-section {
+    @apply rounded-2xl border border-white/10 bg-white/[0.035] p-4 shadow-lg shadow-black/10;
+  }
+  .wj-section-title {
+    @apply mb-3 text-[12px] font-black uppercase tracking-[0.18em] text-blue-400;
+  }
+  .wj-field-label {
+    @apply mb-1.5 block text-[11px] font-black uppercase tracking-[0.12em] text-zinc-400;
+  }
+  .wj-field {
+    @apply w-full rounded-xl border border-white/10 bg-zinc-950/80 px-3.5 py-3 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-blue-400/70 focus:ring-2 focus:ring-blue-400/20 disabled:cursor-wait disabled:opacity-70;
+  }
+  .wj-field option {
+    @apply bg-zinc-950 text-white;
+  }
+  .wj-line-item {
+    @apply rounded-2xl border border-white/10 bg-blue-950/25 p-3 shadow-inner shadow-black/20;
+  }
+  .wj-gst-section {
+    @apply rounded-2xl border border-orange-400/20 bg-orange-500/10 p-4;
+  }
+  .wj-gst-title {
+    @apply mb-2 text-[12px] font-black uppercase tracking-[0.18em] text-orange-300;
+  }
+  .wj-total-card {
+    @apply rounded-2xl border border-blue-400/20 bg-blue-500/10 p-4;
+  }
+  .wj-action-bar {
+    @apply fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-white/10 bg-zinc-950/95 p-4 backdrop-blur-xl sm:sticky sm:bottom-auto;
+  }
+  .wj-toggle {
+    @apply relative inline-flex h-6 w-11 rounded-full border-2 border-transparent bg-zinc-700 transition-colors data-[checked=true]:bg-blue-500;
+  }
+  .wj-toggle-thumb {
+    @apply inline-block h-5 w-5 rounded-full bg-white shadow transition duration-200;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .wj-light-screen {
+    background: #f8fafc;
+    color: #0f172a;
+  }
+}
+
+
+/* Hard fallback styles for workflow forms.
+   These sit outside Tailwind @layer so Job / Quote / Invoice forms never fall back to raw browser inputs if a Tailwind layer is missed during deploy. */
+.wj-section {
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.035);
+  padding: 1rem;
+  box-shadow: 0 12px 28px rgba(0,0,0,.16);
+}
+.wj-section-title {
+  margin-bottom: .75rem;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: #60a5fa;
+}
+.wj-field-label {
+  display: block;
+  margin-bottom: .375rem;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #a1a1aa;
+}
+.wj-field, .wj-input {
+  display: block;
+  width: 100%;
+  min-height: 2.75rem;
+  border-radius: .875rem;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(9,9,11,.86);
+  color: #fafafa;
+  padding: .75rem .875rem;
+  font-size: .95rem;
+  line-height: 1.35;
+  outline: none;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,.18);
+}
+.wj-field::placeholder, .wj-input::placeholder { color: #71717a; opacity: 1; }
+.wj-field:focus, .wj-input:focus {
+  border-color: rgba(96,165,250,.75);
+  box-shadow: 0 0 0 3px rgba(96,165,250,.18), inset 0 2px 8px rgba(0,0,0,.18);
+}
+.wj-field:disabled, .wj-input:disabled { opacity: .7; cursor: wait; }
+.wj-field option, .wj-input option { background: #09090b; color: #fafafa; }
+textarea.wj-field, textarea.wj-input { min-height: 5.5rem; resize: vertical; }
+.wj-line-item {
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(30,58,138,.22);
+  padding: .75rem;
+}
+.wj-gst-section {
+  border-radius: 1rem;
+  border: 1px solid rgba(251,146,60,.22);
+  background: rgba(249,115,22,.10);
+  padding: 1rem;
+}
+.wj-total-card {
+  border-radius: 1rem;
+  border: 1px solid rgba(96,165,250,.25);
+  background: rgba(59,130,246,.10);
+  padding: 1rem;
+}
+.wj-appbar {
+  position: sticky; top: 0; z-index: 40; display: flex; align-items: center; gap: .5rem;
+  min-height: 4rem; padding: .75rem 1rem; background: #2563eb; color: white;
+  border-bottom: 1px solid rgba(255,255,255,.12); box-shadow: 0 8px 20px rgba(0,0,0,.22);
+}
+.wj-appbar-title { flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 900; font-size: 1.35rem; }
+.wj-appbar-btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 2.5rem; border-radius: .75rem; padding: .5rem .75rem; font-weight: 800; color: white; }
+.wj-appbar-btn:hover { background: rgba(255,255,255,.15); }
+@media (prefers-color-scheme: light) {
+  .wj-light-screen .wj-field, .wj-light-screen .wj-input { background: #fff; color: #0f172a; border-color: #dbe4ee; box-shadow: none; }
+  .wj-light-screen .wj-field::placeholder, .wj-light-screen .wj-input::placeholder { color: #64748b; }
+}

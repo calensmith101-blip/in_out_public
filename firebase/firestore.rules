@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // Stripe/Firebase service account writes subscription docs from the webhook.
+    // Signed-in users may read their own subscription status, but cannot mark themselves active.
+    match /users/{userId}/subscriptions/{document=**} {
+      allow read: if isOwner(userId);
+      allow write: if false;
+    }
+
+    // All normal app data is private per Firebase Auth uid.
+    match /users/{userId}/{collectionId}/{document=**} {
+      allow read, write: if isOwner(userId) && collectionId != 'subscriptions';
+    }
+  }
+}
